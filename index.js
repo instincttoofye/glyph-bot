@@ -21,4 +21,13 @@ client.once("ready", () => {
     console.log(`Bot logged in as ${client.user.tag}`);
 });
 
+client.on(Events.MessageCreate, async (message) => {
+    if (message.author.bot) return;
+
+    if (!message.content.startsWith("!")) return;
+
+    const command = message.content.slice(1);
+    processCommand(message, command);
+})
+
 client.login(process.env.DISCORD_BOT_TOKEN);
